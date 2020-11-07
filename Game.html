@@ -28,13 +28,13 @@
             return true;
         }
         
-        var melon_speed = 3;
+        var melon_speed = 4;
         var FPS = 40;
-        var time_remaining = 20;
+        var time_remaining = 60;
         function restart_game(){
-            time_remaining = 20;
+            time_remaining = 60;
             score = 0;
-            melon_speed = 3;
+            melon_speed = 4;
         }
         function Do_a_Frame() {
             ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
@@ -48,11 +48,12 @@
             if (time_remaining <= 0) {
                 ctx.fillStyle = "red";
                 ctx.font = "bold 50px Arial";
-                ctx.textAlingn = "center";
+                ctx.textAlign = "center";
                 ctx.fillText("Game Over", myCanvas.width / 2, myCanvas.height / 2);
                 ctx.font = "bold 20px Arial";
                 ctx.fillText("Press s to play again", myCanvas.width / 2, (myCanvas.height / 2) + 50);
-                ctx.textAlingn = "left";
+                ctx.textAlign = "left";
+                
             } else {
                 time_remaining = time_remaining - 1 / FPS;
                 melon_y = melon_y + melon_speed;
@@ -83,8 +84,8 @@
         }   
         function MyKeyDownHandler(MyEvent) {
             if (MyEvent.keyCode == 37 && bug_x > 0) { bug_x = bug_x - 10; }
-            if (MyEvent.keyCode == 39 && BugImg.width < myCanvas.width) { bug_x = bug_x + 10; }
-            if (MyEvent.keyCode == 83 ) restart_game();
+            if (MyEvent.keyCode == 39 && bug_x + BugImg.width < myCanvas.width) { bug_x = bug_x + 10; }
+            if (MyEvent.keyCode == 83 && time_remaining <= 0) restart_game();
             MyEvent.preventDefault();
         
         
